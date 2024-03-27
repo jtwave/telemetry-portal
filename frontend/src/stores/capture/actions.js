@@ -133,6 +133,8 @@ export async function beginRecording() {
     useMagnetometer: get(captureSettings.useMagnetometer),
   });
   captureState.set("armed");
+  //this is exactly where code IMU data is called to start parsing and 
+  //storing the data. and it also sets the isarmed state to true 
   imuCapturer.start();
 }
 

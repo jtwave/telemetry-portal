@@ -56,7 +56,7 @@ export const state = readable(null, async (set) => {
 export const imuVelocity = derived(imuData, ($imuData) => {
   // we only want accelorameter + gyro which is the 6 first values
   return $imuData
-    ? $imuData.slice(0, 6).reduce((a, b) => a + Math.abs(b), 0) / 6
+    ? $imuData.slice(0, 9).reduce((a, b) => a + Math.abs(b), 0) / 9
     : 0;
 });
 
@@ -75,9 +75,9 @@ export const dataLabels = persistStore("bleInterface.dataLabels", [
   "gyro.x",
   "gyro.y",
   "gyro.z",
-  "mag.x",
-  "mag.y",
-  "mag.z",
+  "test.x",
+  "test.y",
+  "test.z",
 ]);
 
 isConnected.subscribe(async ($isConnected) => {

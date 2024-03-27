@@ -35,6 +35,7 @@ persistStore.onError(() => {
 
 export const labels = persistStore("capture.labels", []);
 
+//captureState is used a lot and it makes the statestore idle at first with the other states valid as well
 export const captureState = stateStore("idle", [
   "idle",
   "armed",
@@ -42,10 +43,11 @@ export const captureState = stateStore("idle", [
   "waiting",
 ]);
 
+//again either 6 or 9 sensor channels right now depending on whether or not magnometer is used.
 export const captureDataLength = derived(
   useMagnetometer,
   ($useMagnetometer) => {
-    return $useMagnetometer ? 9 : 6;
+    return $useMagnetometer ? 9 : 9;
   }
 );
 

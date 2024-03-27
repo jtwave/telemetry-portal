@@ -59,7 +59,7 @@ export async function beginTesting() {
       const [predictions] = predictionsTensor.arraySync();
       testPredictions.set(predictions);
     },
-    thresholdFilter: [1, 1, 1, 1, 1, 1, 0, 0, 0],
+    thresholdFilter: [1, 1, 1, 1, 1, 1, 3, 0, 0],
     useMagnetometer: get(captureSettings.useMagnetometer),
   });
 

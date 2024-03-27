@@ -60,7 +60,7 @@ export const captureImuLabels = derived(
     if ($useMagnetometer) {
       return [...$dataLabels];
     } else {
-      return $dataLabels.slice(0, 6);
+      return $dataLabels.slice(0, 9);
     }
   }
 );

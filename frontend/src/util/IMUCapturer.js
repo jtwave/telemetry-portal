@@ -70,6 +70,7 @@ class IMUCapturer {
     this.useMagnetometer = useMagnetometer;
   }
 
+  //uses dataRecorder.js to fill capture with the channels
   handleDoneCapturing() {
     let capture;
     if (this.dataRecorder) {
@@ -84,13 +85,16 @@ class IMUCapturer {
     this.lastCaptureTs = nowSec();
   }
 
+  //possibly change this if adding another magnometer make it recieve 15 sensors
   handleDataReceived(data) {
     if (!this.useMagnetometer) {
-      data = sliceArray(data, 0, 6);
+      data = sliceArray(data, 0, 9);
     } else {
       data = sliceArray(data, 0, 9);
     }
 
+    //this is how it constantly captures data recieved based on if the time now minus the
+    //last capture time is less then the set capture delay to be done but if not stay capturing.
     if (this.isArmed && !this.isRecording) {
       if (this.lastCaptureTs) {
         if (nowSec() - this.lastCaptureTs < this.captureDelay) {
@@ -126,6 +130,7 @@ class IMUCapturer {
     }
   }
 
+  //starts the recieving of the data
   start() {
     this.isArmed = true;
     bleApi.addEventListener("imudata", this.handleDataReceived);

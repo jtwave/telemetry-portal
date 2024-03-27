@@ -21,7 +21,7 @@ limitations under the License.
   import titlePng from "./assets/title.png";
 </script>
 
-<img src={titlePng} alt="Tiny Motion Trainer" />
+<img src={titlePng} alt="Telemetry Portal" />
 
 <style>
   img {

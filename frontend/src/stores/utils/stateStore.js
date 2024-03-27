@@ -19,6 +19,7 @@ limitations under the License.
 
 import { get, writable } from "svelte/store";
 
+//initializes it to idle state at first but applies the valid states.
 export default function (initial, validStates) {
   const store = writable(initial);
   const { subscribe, set, update } = store;

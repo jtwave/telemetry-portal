@@ -40,6 +40,7 @@ limitations under the License.
     removeLabelByName(label);
   }
 
+  //this is what calls the begin recording if the capture state is idle
   function handleToggleRecording() {
     if ($captureState === "idle") {
       beginRecording();

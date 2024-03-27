@@ -47,6 +47,9 @@ module.exports = (env) => {
       filename: prod ? "[name].[contenthash].js" : "[name].js",
       chunkFilename: prod ? "[name].[id].[contenthash].js" : "[name].[id].js",
     },
+    devServer:{
+      port: 8082,
+    },
     module: {
       rules: [
         // prod

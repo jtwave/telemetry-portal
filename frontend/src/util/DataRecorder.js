@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ======================================================================*/
 
+//pushes the data into this buffer and stores the number of samples to record
 class DataRecorder{
     constructor(numSamples){
         this.numSamplesToRecord = numSamples;
