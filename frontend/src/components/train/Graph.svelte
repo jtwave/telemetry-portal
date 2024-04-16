@@ -1,6 +1,5 @@
-<!--
-Copyright 2021 Google LLC
-
+<!-- 
+Copyright 2021 Google LLC\
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -51,6 +50,11 @@ limitations under the License.
     xLabelStepLen = width / xLabels.length;
   }
 
+  const legends = [
+    { name: "Dataset 1", color: "#FF6F00" },
+    { name: "Dataset 2", color: "#FFA800" },
+  ];
+
   $: updateXLabels(maxX);
   updateXLabels();
 </script>
@@ -65,6 +69,16 @@ limitations under the License.
     xmlns="http://www.w3.org/2000/svg"
   >
     <text class="x-label notation-text" x={4} y={height - yPadding}>0</text>
+    {#each legends as legend, index}
+      <rect
+        x={width - 100}
+        y={30 + index * 30}
+        width="15"
+        height="15"
+        fill={legend.color}
+      />
+      <text x={width - 80} y={43 + index * 30}>{legend.name}</text>
+    {/each}
     {#each xLabels as x, i}
       <line
         x1={(i + 1) * xLabelStepLen}
