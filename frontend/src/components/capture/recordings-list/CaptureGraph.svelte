@@ -22,6 +22,9 @@ limitations under the License.
   import CaptureGraphLine from "./CaptureGraphLine.svelte";
   import { imuDataColors } from "@/stores/ui/store";
   import { captureDataLength } from "@/stores/capture/store";
+  import { dataLabels } from "@/stores/bleInterfaceStore/store.js";
+
+  let sensorNames = [];
 
   export let data;
   export let label;
@@ -30,10 +33,10 @@ limitations under the License.
   export let onDelete = () => {
     console.error("not implemented");
   };
-  const legends = $imuDataColors.map((color, index) =>({
-    name: 'Data ${index + 1',
-    color: color
-  }))
+
+  $: if ($dataLabels.length > 0) {
+    sensorNames = $dataLabels;
+  }
 </script>
 
 <div class="capture-graph">
@@ -50,16 +53,17 @@ limitations under the License.
         : $imuDataColors[index % $imuDataColors.length]}
     />
   {/each}
-  <div class="legend">
-    {#each legends as legend, index}
-      <div class="legend-item">
-        <svg width="16" height="16">
-          <rect width="16" height="16" fill={legend.color} />
-        </svg>
-        <span class="legend-label">{legend.name}</span>
-      </div>
-      {/each}
-  </div>
+</div>
+
+<div class="legend">
+  {#each sensorNames as name, index}
+    <div class="legend-item">
+      <svg width="16" height="16">
+        <rect width="16" height="16" fill={$imuDataColors[index % $imuDataColors.length]} />
+      </svg>
+      <span class="legend-label">{name}</span>
+    </div>
+  {/each}
 </div>
 
 <style lang="scss">
@@ -100,28 +104,23 @@ limitations under the License.
       top: 0;
       left: 0;
     }
+  }
 
-    .legend{
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 8px;
-      background-color: rgba(255, 255, 255, .8);
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-    }
-
-    .legend-item {
-      display:flex;
-      align-items: center;
-    }
-
-    .legend-label {
-      margin-left: 4px;
-      font-size: 12px;
-    }
+  .legend {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .legend-label {
+    margin-left: 5px;
+    white-space: nowrap;
   }
 </style>
